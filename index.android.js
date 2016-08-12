@@ -1,53 +1,47 @@
 /**
- * Sample React Native App
+ * React Native Property Finder Android Version
  * https://github.com/facebook/react-native
  * @flow
  */
 
-import React, { Component } from 'react';
-import {
-  AppRegistry,
-  StyleSheet,
-  Text,
-  View
-} from 'react-native';
+'use-strict';
 
-class PropFinder extends Component {
+var ReactNative = require('react-native');
+var React = require('react');
+var SearchPage = require('./src/components/SearchPage');
+var {
+  Navigator,
+  Text
+} = ReactNative;
+
+
+class PropertyFinderApp extends React.Component {
   render() {
     return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome to React Native!
-        </Text>
-        <Text style={styles.instructions}>
-          To get started, edit index.android.js
-        </Text>
-        <Text style={styles.instructions}>
-          Double tap R on your keyboard to reload,{'\n'}
-          Shake or press menu button for dev menu
-        </Text>
-      </View>
+      <Navigator
+        style = {styles.container}
+        initialRoute={{
+          title: 'Property Finder',
+          index: 0
+        }}
+        renderScene = {(route, navigator) => 
+          <SearchPage title={route.title} navigator={navigator} />
+        }
+      />
     );
   }
 }
 
-const styles = StyleSheet.create({
+var styles = ReactNative.StyleSheet.create({
+  text: {
+    color: 'black',
+    backgroundColor: 'white',
+    fontSize: 30,
+    margin: 80
+  },
   container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
+    flex: 1
+  }
 });
 
-AppRegistry.registerComponent('PropFinder', () => PropFinder);
+ReactNative.AppRegistry.registerComponent('PropFinder', function() { return PropertyFinderApp});
